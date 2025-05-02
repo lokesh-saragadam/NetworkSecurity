@@ -57,7 +57,7 @@ class DataValidation:
 
             dir_path = os.path.dirname(drift_report_file_path)
             os.makedirs(dir_path,exist_ok=True)
-            write_yaml_file(filepath=drift_report_file_path,content=report)
+            write_yaml_file(file_path=drift_report_file_path,content=report)
 
         except Exception as e:
             raise NetworkSecurityException(e,sys)              
@@ -95,7 +95,7 @@ class DataValidation:
                 valid_test_file_path=self.data_ingestion_artifact.test_file_path,
                 invalid_train_file_path=None,
                 invalid_test_file_path=None,
-                drift_report_file_path=self.data_validation_config.drift_report_file_path,
+                drift_report_file_path=self.data_validation_config.drift_report_file_path
             )
             return data_validation_artifact
         except Exception as e:
