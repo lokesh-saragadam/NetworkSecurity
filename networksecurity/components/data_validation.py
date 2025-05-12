@@ -4,7 +4,7 @@ from networksecurity.entity.config_entity import DataValidationConfig
 from networksecurity.entity.config_entity import DataIngestionConfig
 from networksecurity.entity.artifact_entity import DataIngestionArtifact,DataValidationArtifact
 from networksecurity.constants.training_pipeline import SCHEMA_FILE_PATH
-from networksecurity.utils.main_utils import read_yaml_file,write_yaml_file
+from networksecurity.utils.main_utils.utils import read_yaml_file,write_yaml_file
 
 
 from scipy.stats import ks_2samp

@@ -4,7 +4,7 @@ from networksecurity.entity.config_entity import DataValidationConfig
 from networksecurity.entity.config_entity import DataTransformationConfig
 from networksecurity.entity.artifact_entity import DataValidationArtifact,DataTransformationArtifact
 from networksecurity.constants.training_pipeline import SCHEMA_FILE_PATH,TARGET_COLUMN,DATA_TRANSFORMATION_IMPUTER_PARAMS
-from networksecurity.utils.main_utils import read_yaml_file,write_yaml_file
+from networksecurity.utils.main_utils.utils import read_yaml_file,write_yaml_file
 
 import os,sys
 import numpy as np
@@ -12,7 +12,7 @@ import pandas as pd
 from sklearn.impute import KNNImputer
 from sklearn.pipeline import Pipeline
 
-from networksecurity.utils.main_utils import save_numpy_array_data,save_object
+from networksecurity.utils.main_utils.utils import save_numpy_array_data,save_object
 
 class DataTransformation:
     def __init__ (self,data_validation_artifact:DataValidationArtifact,data_transformation_config:DataTransformationConfig):
@@ -81,7 +81,8 @@ class DataTransformation:
                 transformed_object_file_path= self.data_tranformation_config.transformed_object_file_path,
                 transformed_test_file_path=self.data_tranformation_config.transformed_test_file_path,
                 transformed_train_file_path=self.data_tranformation_config.transformed_train_file_path
-            )            
+            )    
+            return data_transformation_artifact        
         
         except Exception as e:
             raise NetworkSecurityException(e,sys)    
