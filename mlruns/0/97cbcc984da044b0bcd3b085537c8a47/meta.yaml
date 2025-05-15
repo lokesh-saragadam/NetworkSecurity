@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/Project2/mlruns/0/97cbcc984da044b0bcd3b085537c8a47/artifacts
+end_time: 1747310111746
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 97cbcc984da044b0bcd3b085537c8a47
+run_name: shivering-hog-709
+run_uuid: 97cbcc984da044b0bcd3b085537c8a47
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747310104474
+status: 3
+tags: []
+user_id: LOKESH

@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/Project2/mlruns/0/042667ba0cca40319653984b5d95ef87/artifacts
+end_time: 1747310104290
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 042667ba0cca40319653984b5d95ef87
+run_name: zealous-mole-946
+run_uuid: 042667ba0cca40319653984b5d95ef87
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1747310088117
+status: 3
+tags: []
+user_id: LOKESH

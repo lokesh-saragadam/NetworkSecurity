@@ -1,15 +1,13 @@
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.logging.logger import logging
 from networksecurity.entity.config_entity import ModelTrainerConfig
-from networksecurity.entity.config_entity import DataTransformationConfig
 from networksecurity.entity.artifact_entity import ModelTrainerArtifact,DataTransformationArtifact
-from networksecurity.utils.main_utils.utils import read_yaml_file,write_yaml_file
 
 import os,sys
 import numpy as np
 import pandas as pd
 
-from networksecurity.utils.main_utils.utils import save_numpy_array_data,save_object,load_object,load_numpy_array_data,evaluate_models
+from networksecurity.utils.main_utils.utils import save_object,load_object,load_numpy_array_data,evaluate_models
 from networksecurity.utils.ml_utils.model.estimator import NetworkModel
 from networksecurity.utils.ml_utils.metrics.classification_metric import get_classification_score
 
@@ -23,14 +21,7 @@ from sklearn.ensemble import (
     RandomForestClassifier,
 )
 import mlflow
-from urllib.parse import urlparse
 
-import dagshub
-#dagshub.init(repo_owner='krishnaik06', repo_name='networksecurity', mlflow=True)
-
-os.environ["MLFLOW_TRACKING_URI"]="https://dagshub.com/krishnaik06/networksecurity.mlflow"
-os.environ["MLFLOW_TRACKING_USERNAME"]="krishnaik06"
-os.environ["MLFLOW_TRACKING_PASSWORD"]="7104284f1bb44ece21e0e2adb4e36a250ae3251f"
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifact):
         try:
@@ -38,7 +29,15 @@ class ModelTrainer:
             self.data_transformation_artifact:DataTransformationArtifact = data_transformation_artifact
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-    
+    def track_mlflow(self,best_model,classificationmetric):
+           with mlflow.start_run(): 
+            f1_score=classificationmetric.f1_score
+            precision_score=classificationmetric.precision_score
+            recall_score=classificationmetric.recall_score
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("precision",precision_score)
+            mlflow.log_metric("recall_score",recall_score)
+            mlflow.sklearn.log_model(best_model,"model")
     def train_model(self,x_train,y_train,x_test,y_test):
         models = {
                 "Random Forest": RandomForestClassifier(verbose=1),
